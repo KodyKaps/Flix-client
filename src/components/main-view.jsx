@@ -18,6 +18,7 @@ export const MainView = () => {
   const [movies,setMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  //apis / side effects (business logic)
   async function fetchMovies(){
     try {
       let response = await fetch(`${API_URL}/movies`)
@@ -28,6 +29,9 @@ export const MainView = () => {
       window.alert("Error fetching movies")
     }
   }
+
+  function createMovie(){}
+  function downloadMovie(){}
 
   //lifecycle method when it first rendered
   useEffect(()=>{
