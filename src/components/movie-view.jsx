@@ -1,12 +1,21 @@
 import './movieCard.scss'
+import PropTypes from 'prop-types'
 export const MovieView = (props) => {
-  let {Title, Description, CoverImageUrl} = props;
+  let {Title, Description, CoverImageUrl, onClose} = props;
   return (
     <div className="movieCard" >
-      <button onClick={() => console.log("Movie clicked", Title)}>X</button>
+      <button onClick={() => onClose()}>X</button>
       <div>{Title}</div>
       <img src={CoverImageUrl} className='coverImage'/>
       <div>{Description}</div>
     </div>
   );
 };
+
+
+MovieView.propTypes = {
+  Title: PropTypes.string,
+  Description: PropTypes.string,
+  CoverImageUrl: PropTypes.string,
+  onMovieClicked: PropTypes.func.isRequired
+}
