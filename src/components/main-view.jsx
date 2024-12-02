@@ -35,7 +35,14 @@ export const MainView = () => {
 
   //notify MainView that login is successful
   if (!user) {
-    return <LoginView onLoggedIn={(user) => setUser(user)} />;
+    return (
+      <LoginView
+        onLoggedIn={(user, token) => {
+          setUser(user);
+          setToken(token);
+        }}
+      />
+    );
   }
 
   //lifecycle method when it first rendered
