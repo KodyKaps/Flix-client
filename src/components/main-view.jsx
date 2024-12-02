@@ -33,6 +33,11 @@ export const MainView = () => {
   function createMovie(){}
   function downloadMovie(){}
 
+  //notify MainView that login is successful
+  if (!user) {
+    return <LoginView onLoggedIn={(user) => setUser(user)} />;
+  }
+
   //lifecycle method when it first rendered
   useEffect(()=>{
     fetchMovies()
