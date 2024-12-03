@@ -1,8 +1,9 @@
 export const NavBar =(props) => {
-    let {user} = props;
+    let {user, onLogout} = props;
     return (
         <div>
-            <div>{user.name}</div>
+            <div>{user.Username}</div>    
+            <button onClick={() => { onLogout() }}>Logout</button>
         </div>  
     )
 }

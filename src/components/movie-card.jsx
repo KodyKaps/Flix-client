@@ -1,10 +1,10 @@
 import './movieCard.scss'
 import PropTypes from 'prop-types'
 export const MovieCard = (props) => {
-  let {title, onMovieClicked} = props;
+  let {Title, onMovieClicked} = props;
   return (
     <div className="movieCard" onClick={() => onMovieClicked()}>
-      <div>{title}</div>
+      <div>{Title}</div>
     </div>
   );
 };
