@@ -22,7 +22,7 @@ export const SignupView = ({ onSignup }) => {
       })
       let data = response.json()
       if (data.user) {
-        onSignup(data.user, data.token);
+        onSignup(data.user);
       } else {
         alert("No such user");
       }
@@ -34,7 +34,7 @@ export const SignupView = ({ onSignup }) => {
   
   return (
     <form onSubmit={handleSubmit} className="login">
-      <h1>Signup</h1>
+      <h1>Or Signup to create an account</h1>
       <label>
         Username:
         <input
