@@ -34,7 +34,7 @@ export const SignupView = ({ onSignup }) => {
   
   return (
     <form onSubmit={handleSubmit} className="login">
-      <h1>Or Signup to create an account</h1>
+      <h1>Signup to create an account</h1>
       <label>
         Username:
         <input

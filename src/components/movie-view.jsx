@@ -1,10 +1,18 @@
+import { Link, useParams } from 'react-router-dom';
 import './movieCard.scss'
 import PropTypes from 'prop-types'
+
 export const MovieView = (props) => {
-  let {Title, Description, CoverImageUrl, onClose} = props;
+  const {movieId} = useParams()
+  const movie = props.movies.find(m => m._id === movieId)
+  console.log(movieId, movie)
+  if(!movie){
+    return <div>Loading</div>
+  }
+  let {Title, Description, CoverImageUrl} = movie;
   return (
     <div className="movieCard" >
-      <button onClick={() => onClose()}>X</button>
+      <Link to="/">X</Link>
       <div>{Title}</div>
       <img src={CoverImageUrl} className='coverImage'/>
       <div>{Description}</div>
@@ -14,8 +22,6 @@ export const MovieView = (props) => {
 
 
 MovieView.propTypes = {
-  Title: PropTypes.string,
-  Description: PropTypes.string,
-  CoverImageUrl: PropTypes.string,
-  onMovieClicked: PropTypes.func.isRequired
+  
+  
 }

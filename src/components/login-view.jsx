@@ -30,13 +30,14 @@ export const LoginView = ({ onLoggedIn }) => {
       }
     } 
     catch (error) {
-      //right now the api is failing we need to figure out the bug in the api so that the client can be fixed
+      
       alert("Failed to login")
     }
   }    
   
   return (
     <Form onSubmit={handleSubmit}>
+      <h1>Login</h1>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
