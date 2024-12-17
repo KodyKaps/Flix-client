@@ -11,6 +11,7 @@ import { NavBar } from './components/navbar';
 import { LoginView } from './components/login-view';
 import { SignupView } from './components/sign-up-view';
 import { MovieView } from './components/movie-view';
+import { ProfileView } from './components/profile-view';
 // Main component (will eventually use all the others)
 const API_URL= "https://movie-api-d90y.onrender.com"
 const MyFlixApplication = () => {
@@ -21,8 +22,8 @@ const MyFlixApplication = () => {
     let t = localStorage.getItem('user-token')
     setToken(t)
 
-    //TODO: extract user and store
-    //setUser({Username: 'test-user'})
+    let u = JSON.parse(localStorage.getItem('user'))
+    setUser(u)
     return t
   }
 
@@ -30,6 +31,10 @@ const MyFlixApplication = () => {
   function storeToken(t){
     localStorage.setItem('user-token', t)
     setToken(t)
+  }
+  function storeUser(u){
+    localStorage.setItem('user', JSON.stringify(u))
+    setUser(u)
   }
   const [movies,setMovies] = useState([])
 
@@ -71,7 +76,7 @@ const MyFlixApplication = () => {
           <Navigate to="/"/> 
           : 
           <LoginView 
-            onLoggedIn={(user, token) => {setUser(user); storeToken(token)}}
+            onLoggedIn={(user, token) => {storeUser(user); storeToken(token)}}
           />
 
           }
@@ -81,9 +86,12 @@ const MyFlixApplication = () => {
           user ? 
           <Navigate to="/"/> 
           : 
-          <SignupView/>
-          
+          <SignupView/>  
         }/>
+
+        <Route path="/profile/:userId" element={<ProfileView/>}/>
+
+
       </Routes>
     </BrowserRouter>
   )

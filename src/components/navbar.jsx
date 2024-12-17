@@ -6,12 +6,13 @@ export const NavBar =(props) => {
         <div>
             <Link to="/login">Login</Link>
             <Link to="/signup">Signup</Link>
+            
         </div>
     }
     return (
         <div>
             <div>{user.Username}</div>    
-            
+            <Link to={`/profile/${user._id}`}>Profile</Link>
         </div>  
     )
 }
