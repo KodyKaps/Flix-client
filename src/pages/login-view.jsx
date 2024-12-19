@@ -2,8 +2,7 @@ import React,{useState} from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/form";
 import './login-view.scss'
-const API_URL= "https://movie-api-d90y.onrender.com"
-
+import {login} from '../api/flixApi'
 export const LoginView = ({ onLoggedIn }) => {
   //import useState
   const [username, setUsername] = useState("")
@@ -12,28 +11,32 @@ export const LoginView = ({ onLoggedIn }) => {
   const handleSubmit = async (event) => {
     // this prevents the default behavior of the form which is to reload the entire page
     event.preventDefault();
-    const requestData = {
-      Username: username,
-      Password: password
-    };
-    try {
-      let response = await fetch(`${API_URL}/login?Username=${username}&Password=${password}`, {
-        method: "POST",
-        body: JSON.stringify(requestData)
-      })
-      let data = await response.json()
+    try{
+      let data = await login(username,password)
       console.log("Response from api", data)
       if (data.user) {
-        onLoggedIn(data.user, data.token);
+        storeUser(data.user)
+        storeToken(data.token);
+        window.location.href='/'
       } else {
         alert("No such user");
       }
     } 
     catch (error) {
-      
-      alert("Failed to login")
+      console.error("login failed", error)
+      alert("login failed")
     }
   }    
+
+  //store in ls and your component state
+  function storeToken(t){
+    localStorage.setItem('user-token', t)
+    
+  }
+  function storeUser(u){
+    localStorage.setItem('user', JSON.stringify(u))
+    
+  }
   
   return (
     <Form onSubmit={handleSubmit}>

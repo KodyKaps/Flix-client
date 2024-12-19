@@ -1,37 +1,35 @@
 import React,{useState} from "react";
 import './login-view.scss'
+import { login, signupUser } from "../api/flixApi";
 
-const API_URL= "https://movie-api-d90y.onrender.com"
 
-export const SignupView = ({ onSignup }) => {
+
+export const SignupView = ({  }) => {
   //import useState
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-
+  const [email, setEmail] = useState("")
+  const [birthdate, setBirthdate] = useState("")
   const handleSubmit = async (event) => {
     // this prevents the default behavior of the form which is to reload the entire page
     event.preventDefault();
-    const requestData = {
-      Username: username,
-      Password: password
-    };
-    try {
-      let response = await fetch(`${API_URL}/users`, {
-        method: "POST",
-        body: JSON.stringify(requestData)
-      })
-      let data = response.json()
-      if (data.user) {
-        onSignup(data.user);
-      } else {
-        alert("No such user");
+    try{
+
+      let signupResponse = await signupUser(username, password, email, birthdate)
+      let loginResponse = await login(username,password)
+      if (!loginResponse.user || !loginResponse.token) {
+        alert("Failed to login user");
       }
+      window.location.href = '/'
+      storeUser(loginResponse.user)
+      storeToken(loginResponse.token)
     } 
     catch (error) {
+      console.error("Failed to create user", error)
       alert("Failed to login")
     }
   }    
-  
+
   return (
     <form onSubmit={handleSubmit} className="login">
       <h1>Signup to create an account</h1>
@@ -52,6 +50,18 @@ export const SignupView = ({ onSignup }) => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+      </label>
+      <label>
+        Email:
+        <input value={email}
+        onChange={(e) => setEmail(e.target.value)}
+          required/>
+      </label>
+      <label>
+        Birthdate
+        <input value={birthdate}
+        onChange={(e) => setBirthdate(e.target.value)}
+        required/>
       </label>
       <button type="submit">Submit</button>
     </form>

@@ -1,11 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
-import './movieCard.scss'
+import './movie-view.scss'
 import PropTypes from 'prop-types'
 
 export const MovieView = (props) => {
   const {movieId} = useParams()
   const movie = props.movies.find(m => m._id === movieId)
-  console.log(movieId, movie)
+  //console.log(movieId, movie)
   if(!movie){
     return <div>Loading</div>
   }

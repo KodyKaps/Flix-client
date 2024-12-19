@@ -1,6 +1,6 @@
 //imports
 
-import { MovieCard } from "./movie-card";
+import { MovieCard } from "../components/movie-card";
 //constants
 
 export const MainView = (props) => {
