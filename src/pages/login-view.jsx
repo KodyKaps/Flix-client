@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/form";
+import {Button,Form} from "react-bootstrap";
+
 import './login-view.scss'
 import {login} from '../api/flixApi'
 export const LoginView = ({ onLoggedIn }) => {
