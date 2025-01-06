@@ -14,7 +14,7 @@ export const ProfileView = (props) => {
     const [birthdate, setBirthdate] = useState("")
     //display favorite movies
     const [favoriteMovies, setFavoriteMovies] = useState([])
-    deregister = async() => {
+    const deregister = async() => {
         //deregister a user
         let t = localStorage.getItem('user-token')
         try {
